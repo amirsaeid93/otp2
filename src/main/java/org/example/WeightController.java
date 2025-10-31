@@ -28,8 +28,7 @@ public class WeightController {
 
     @FXML
     public void initialize() {
-        // This method is called by FXMLLoader after the FXML is loaded.
-        // We can get the bundle that was used to load it.
+
         bundle = ResourceBundle.getBundle("MessagesBundle", Locale.getDefault());
     }
 
@@ -56,13 +55,12 @@ public class WeightController {
     @FXML
     protected void onCalculateBMI() {
         try {
-            lblInvalid.setText(""); // Clear previous error message
+            lblInvalid.setText("");
             double weight = Double.parseDouble(weightField.getText());
             double height = Double.parseDouble(heightField.getText());
 
             if (height > 0) {
                 double bmi = weight / (height * height);
-                // Using the bundle to get the localized result string
                 String resultText = bundle.getString("lblResult.text");
                 lblResult.setText(String.format("%s %.2f", resultText, bmi));
             } else {
