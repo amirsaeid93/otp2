@@ -1,25 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<VBox xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" spacing="10" fx:controller="org.example.WeightController">
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.example.WeightController">
     <padding>
-        <Insets top="20" right="20" bottom="20" left="20"/>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
 
-    <Label fx:id="lblWeight" text="Weight"/>
-    <TextField fx:id="tWeight"/>
-    <Label fx:id="lblHeight" text="Height"/>
-    <TextField fx:id="tHeight"/>
-    <Button fx:id="btnCalculate" onAction="#onCalculateClick"/>
-    <Label fx:id="lblResult"/>
-    <label fx:id="lblLocalTime"/>
+    <Label fx:id="welcomeLabel" text="%text"/>
 
-    <Button text="%button1.text" onAction="#onButton1Click"/>
-    <Button text="%button2.text" onAction="#onButton2Click"/>
-    <Button text="%button3.text" onAction="#onButton3Click"/>
-    <Button text="%button4.text" onAction="#onButton4Click"/>
+    <HBox spacing="10.0" alignment="CENTER">
+        <Button onAction="#onButton1Click" text="%button1.text"/>
+        <Button onAction="#onButton2Click" text="%button2.text"/>
+        <Button onAction="#onButton3Click" text="%button3.text"/>
+        <Button onAction="#onButton4Click" text="%button4.text"/>
+    </HBox>
+
+    <HBox spacing="10.0" alignment="CENTER">
+        <Label fx:id="lblWeight" text="%lblWeight.text"/>
+        <TextField fx:id="weightField"/>
+    </HBox>
+
+    <HBox spacing="10.0" alignment="CENTER">
+        <Label fx:id="lblHeight" text="%lblHeight.text"/>
+        <TextField fx:id="heightField"/>
+    </HBox>
+
+    <Button fx:id="btnCalculate" onAction="#onCalculateBMI" text="%btnCalculate.text"/>
+
+    <Label fx:id="lblResult" text=""/>
+    <Label fx:id="lblInvalid" text="" style="-fx-text-fill: red;"/>
+
 </VBox>

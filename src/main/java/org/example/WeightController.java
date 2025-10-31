@@ -6,6 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -15,7 +16,22 @@ import java.util.ResourceBundle;
 public class WeightController {
 
     @FXML
-    private Label label;
+    private TextField weightField;
+    @FXML
+    private TextField heightField;
+    @FXML
+    private Label lblResult;
+    @FXML
+    private Label lblInvalid;
+
+    private ResourceBundle bundle;
+
+    @FXML
+    public void initialize() {
+        // This method is called by FXMLLoader after the FXML is loaded.
+        // We can get the bundle that was used to load it.
+        bundle = ResourceBundle.getBundle("MessagesBundle", Locale.getDefault());
+    }
 
     @FXML
     protected void onButton1Click(javafx.event.ActionEvent event) throws IOException {
@@ -29,12 +45,32 @@ public class WeightController {
 
     @FXML
     protected void onButton3Click(javafx.event.ActionEvent event) throws IOException {
-        setLanguage(event, new Locale("fa", "IR"));
+        setLanguage(event, new Locale("ur", "PA"));
     }
 
     @FXML
     protected void onButton4Click(javafx.event.ActionEvent event) throws IOException {
-        setLanguage(event, new Locale("fi", "FI"));
+        setLanguage(event, new Locale("vi", "VI"));
+    }
+
+    @FXML
+    protected void onCalculateBMI() {
+        try {
+            lblInvalid.setText(""); // Clear previous error message
+            double weight = Double.parseDouble(weightField.getText());
+            double height = Double.parseDouble(heightField.getText());
+
+            if (height > 0) {
+                double bmi = weight / (height * height);
+                // Using the bundle to get the localized result string
+                String resultText = bundle.getString("lblResult.text");
+                lblResult.setText(String.format("%s %.2f", resultText, bmi));
+            } else {
+                lblInvalid.setText(bundle.getString("lblInvalid.text"));
+            }
+        } catch (NumberFormatException e) {
+            lblInvalid.setText(bundle.getString("lblInvalid.text"));
+        }
     }
 
     private void setLanguage(javafx.event.ActionEvent event, Locale locale) throws IOException {
@@ -45,24 +81,5 @@ public class WeightController {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-    }
-    public void initialize (javafx.event.ActionEvent actionEvent) {
-        try {
-            setLanguage(actionEvent, new Locale("en", "US"));
-        } catch (IOException e) {
-
-        }
-    }
-    public void initialize(Locale locale) {
-        ResourceBundle bundle = ResourceBundle.getBundle("MessagesBundle", locale);
-        label.setText(bundle.getString("label.text"));
-    }
-    public void onENClick(javafx.event.ActionEvent actionEvent) {
-       try {
-           setLanguage(actionEvent, new Locale("en", "US"));
-       } catch (IOException e) {
-
-       }
-
     }
 }
