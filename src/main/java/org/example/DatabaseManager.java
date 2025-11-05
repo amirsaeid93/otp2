@@ -11,7 +11,7 @@ public class DatabaseManager {
 
     private static final String DB_URL = "jdbc:mariadb://localhost:3306/weight_db?useUnicode=true&characterEncoding=UTF-8";
     private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "saeidt";
+    private static final String DB_PASSWORD = "admin";
 
     public static void initializeDatabase() {
         try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
@@ -47,7 +47,6 @@ public class DatabaseManager {
     }
 
     private static void populateFromPropertiesFiles(Connection conn) throws Exception {
-        // Corrected Locales to ur_PA (Urdu) and vi_VN (Vietnamese)
         Locale[] locales = {new Locale("en", "US"), new Locale("fr", "FR"), new Locale("ur", "PA"), new Locale("vi", "VN")};
         for (Locale locale : locales) {
             loadAndInsertProperties(conn, locale);
@@ -125,7 +124,7 @@ public class DatabaseManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        // Fallback logic
+
         System.out.println("Translation not found for key '" + key + "' and locale '" + locale.toLanguageTag() + "'. Falling back to English.");
         return getTranslation(key, new Locale("en", "US"));
     }

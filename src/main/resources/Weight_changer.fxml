@@ -18,7 +18,6 @@
     <HBox spacing="10.0" alignment="CENTER">
         <Button fx:id="btnEnglish" onAction="#onButton1Click" text="English"/>
         <Button fx:id="btnFrench" onAction="#onButton2Click" text="Française"/>
-        <!-- Corrected fx:id to match controller -->
         <Button fx:id="btnUrdu" onAction="#onButton3Click" text="اردو"/>
         <Button fx:id="btnVietnamese" onAction="#onButton4Click" text="Tiếng Việt"/>
     </HBox>

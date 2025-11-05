@@ -27,7 +27,7 @@ public class WeightController {
     @FXML
     private Label lblInvalid;
 
-    // Buttons for language switching
+
     @FXML
     private Button btnEnglish;
     @FXML
@@ -45,19 +45,18 @@ public class WeightController {
     }
 
     private void updateTexts() {
-        // Set button texts from the database
         btnEnglish.setText(DatabaseManager.getTranslation("button1.text", currentLocale));
         btnFrench.setText(DatabaseManager.getTranslation("button2.text", currentLocale));
         btnUrdu.setText(DatabaseManager.getTranslation("button3.text", currentLocale));
         btnVietnamese.setText(DatabaseManager.getTranslation("button4.text", currentLocale));
 
-        // Set other UI element texts
+
         welcomeLabel.setText(DatabaseManager.getTranslation("text", currentLocale));
         lblWeight.setText(DatabaseManager.getTranslation("lblWeight.text", currentLocale));
         lblHeight.setText(DatabaseManager.getTranslation("lblHeight.text", currentLocale));
         btnCalculate.setText(DatabaseManager.getTranslation("btnCalculate.text", currentLocale));
         
-        // Clear previous results
+
         lblResult.setText("");
         lblInvalid.setText("");
     }
