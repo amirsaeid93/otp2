@@ -1,83 +1,102 @@
 package org.example;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.util.Locale;
-import java.util.ResourceBundle;
 
 public class WeightController {
 
     @FXML
+    private Label welcomeLabel;
+    @FXML
+    private Label lblWeight;
+    @FXML
     private TextField weightField;
     @FXML
+    private Label lblHeight;
+    @FXML
     private TextField heightField;
+    @FXML
+    private Button btnCalculate;
     @FXML
     private Label lblResult;
     @FXML
     private Label lblInvalid;
 
-    private ResourceBundle bundle;
+    // Buttons for language switching
+    @FXML
+    private Button btnEnglish;
+    @FXML
+    private Button btnFrench;
+    @FXML
+    private Button btnUrdu;
+    @FXML
+    private Button btnVietnamese;
+
+    private Locale currentLocale = new Locale("en", "US");
 
     @FXML
     public void initialize() {
+        updateTexts();
+    }
 
-        bundle = ResourceBundle.getBundle("MessagesBundle", Locale.getDefault());
+    private void updateTexts() {
+        // Set button texts from the database
+        btnEnglish.setText(DatabaseManager.getTranslation("button1.text", currentLocale));
+        btnFrench.setText(DatabaseManager.getTranslation("button2.text", currentLocale));
+        btnUrdu.setText(DatabaseManager.getTranslation("button3.text", currentLocale));
+        btnVietnamese.setText(DatabaseManager.getTranslation("button4.text", currentLocale));
+
+        // Set other UI element texts
+        welcomeLabel.setText(DatabaseManager.getTranslation("text", currentLocale));
+        lblWeight.setText(DatabaseManager.getTranslation("lblWeight.text", currentLocale));
+        lblHeight.setText(DatabaseManager.getTranslation("lblHeight.text", currentLocale));
+        btnCalculate.setText(DatabaseManager.getTranslation("btnCalculate.text", currentLocale));
+        
+        // Clear previous results
+        lblResult.setText("");
+        lblInvalid.setText("");
     }
 
     @FXML
-    protected void onButton1Click(javafx.event.ActionEvent event) throws IOException {
-        setLanguage(event, new Locale("en", "US"));
+    protected void onButton1Click(ActionEvent event) {
+        currentLocale = new Locale("en", "US");
+        updateTexts();
     }
 
     @FXML
-    protected void onButton2Click(javafx.event.ActionEvent event) throws IOException {
-        setLanguage(event, new Locale("fr", "FR"));
+    protected void onButton2Click(ActionEvent event) {
+        currentLocale = new Locale("fr", "FR");
+        updateTexts();
     }
 
     @FXML
-    protected void onButton3Click(javafx.event.ActionEvent event) throws IOException {
-        setLanguage(event, new Locale("ur", "PA"));
+    protected void onButton3Click(ActionEvent event) {
+        currentLocale = new Locale("ur", "PA");
+        updateTexts();
     }
 
     @FXML
-    protected void onButton4Click(javafx.event.ActionEvent event) throws IOException {
-        setLanguage(event, new Locale("vi", "VI"));
+    protected void onButton4Click(ActionEvent event) {
+        currentLocale = new Locale("vi", "VN");
+        updateTexts();
     }
 
     @FXML
     protected void onCalculateBMI() {
         try {
-            lblInvalid.setText("");
             double weight = Double.parseDouble(weightField.getText());
             double height = Double.parseDouble(heightField.getText());
-
-            if (height > 0) {
-                double bmi = weight / (height * height);
-                String resultText = bundle.getString("lblResult.text");
-                lblResult.setText(String.format("%s %.2f", resultText, bmi));
-            } else {
-                lblInvalid.setText(bundle.getString("lblInvalid.text"));
-            }
+            double bmi = weight / (height * height);
+            lblResult.setText(String.format("BMI: %.2f", bmi));
+            lblInvalid.setText("");
         } catch (NumberFormatException e) {
-            lblInvalid.setText(bundle.getString("lblInvalid.text"));
+            lblInvalid.setText(DatabaseManager.getTranslation("error.invalidInput", currentLocale));
+            lblResult.setText("");
         }
-    }
-
-    private void setLanguage(javafx.event.ActionEvent event, Locale locale) throws IOException {
-        ResourceBundle bundle = ResourceBundle.getBundle("MessagesBundle", locale);
-        FXMLLoader fxmlLoader = new FXMLLoader(WeightApplication.class.getResource("/Weight_changer.fxml"), bundle);
-        Parent root = fxmlLoader.load();
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
     }
 }

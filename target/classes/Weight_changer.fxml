@@ -13,26 +13,27 @@
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
 
-    <Label fx:id="welcomeLabel" text="%text"/>
+    <Label fx:id="welcomeLabel" text=""/>
 
     <HBox spacing="10.0" alignment="CENTER">
-        <Button onAction="#onButton1Click" text="%button1.text"/>
-        <Button onAction="#onButton2Click" text="%button2.text"/>
-        <Button onAction="#onButton3Click" text="%button3.text"/>
-        <Button onAction="#onButton4Click" text="%button4.text"/>
+        <Button fx:id="btnEnglish" onAction="#onButton1Click" text="English"/>
+        <Button fx:id="btnFrench" onAction="#onButton2Click" text="Française"/>
+        <!-- Corrected fx:id to match controller -->
+        <Button fx:id="btnUrdu" onAction="#onButton3Click" text="اردو"/>
+        <Button fx:id="btnVietnamese" onAction="#onButton4Click" text="Tiếng Việt"/>
     </HBox>
 
     <HBox spacing="10.0" alignment="CENTER">
-        <Label fx:id="lblWeight" text="%lblWeight.text"/>
+        <Label fx:id="lblWeight" text=""/>
         <TextField fx:id="weightField"/>
     </HBox>
 
     <HBox spacing="10.0" alignment="CENTER">
-        <Label fx:id="lblHeight" text="%lblHeight.text"/>
+        <Label fx:id="lblHeight" text=""/>
         <TextField fx:id="heightField"/>
     </HBox>
 
-    <Button fx:id="btnCalculate" onAction="#onCalculateBMI" text="%btnCalculate.text"/>
+    <Button fx:id="btnCalculate" onAction="#onCalculateBMI" text=""/>
 
     <Label fx:id="lblResult" text=""/>
     <Label fx:id="lblInvalid" text="" style="-fx-text-fill: red;"/>
