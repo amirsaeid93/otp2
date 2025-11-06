@@ -11,7 +11,7 @@ public class DatabaseManager {
 
     private static final String DB_URL = "jdbc:mariadb://localhost:3306/weight_db?useUnicode=true&characterEncoding=UTF-8";
     private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "admin";
+    private static final String DB_PASSWORD = "saeidt";
 
     public static void initializeDatabase() {
         try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
