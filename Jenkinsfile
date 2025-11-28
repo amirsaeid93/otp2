@@ -11,7 +11,7 @@ pipeline {
 
     tools {
         // Make sure 'Maven3' matches a Maven installation name in your Jenkins Global Tool Configuration
-        maven 'Maven3'
+        maven 'MAVEN_HOME'
     }
 
     stages {
