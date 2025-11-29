@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        JAVA_HOME = 'C:\\Program Files\\Eclipse Adoptium\\jdk-17.0.12.7-hotspot'  // Adjust to your JDK path
+        JAVA_HOME = 'C:\\Program Files\\Java\\jdk-17'  // Adjust to your JDK path
         MAVEN_HOME = tool 'MAVEN_HOME'  // Assumes 'Maven3' is configured in Jenkins Tools
         JMETER_HOME = 'C:\\Tools\\apache-jmeter-5.6.3\\apache-jmeter-5.6.3'  // Adjust to your JMeter path
         PATH = "${JAVA_HOME}\\bin;${MAVEN_HOME}\\bin;${JMETER_HOME}\\bin;${env.PATH}"
